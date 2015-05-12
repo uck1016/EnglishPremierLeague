@@ -2,18 +2,16 @@
  * Created by chaitanyakrishna on 4/1/2015.
  */
 var mongoClient=require("mongodb").MongoClient;
-var url="mongodb://localhost:27017/test";
+var globals=require("../../globals");
+var config=new globals();
 var router=require("express").Router();
 var playerDetail;
-
-
 router.post("/api/getPlayerData",function(req,res){
     var playerId=req.body.playerId;
     getPlayerInfo(playerId,function(result){
         res.json(result);
     })
 })
-
 function getPlayerInfo(playerId,callback){
     mongoClient.connect(url,function(err,db){
         var collection=db.collection("epldata");

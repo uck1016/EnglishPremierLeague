@@ -45,4 +45,4 @@ app.use(require("./controllers/api/GetStatsByTournament"));
 app.listen(process.env.PORT || 4545,function(){
     console.log("server listening on",4545)
 })
-},45000);
+},50000);
