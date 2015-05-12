@@ -6,11 +6,6 @@ var globals=require("./globals");
 var config=new globals();
 var mongo_factory=require("mongo-factory");
 var fs=require("fs");
-
-var AWS=require("aws-sdk");
-//AWS.config.update({accessKeyId: 'AKIAITH3I536I4RXVPKA', secretAccessKey: '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'});
-AWS.config.update({region: 'us-east-1'});
-var s3= new AWS.S3();
 //var syncRequest=require("sync-request");
 var request = require("request");
 var assert= require("assert");
@@ -36,11 +31,6 @@ fs.readFile("./assets/eplKeySet.txt",function(err,data){
     var eplKeySet=(data).toString("utf8");
     callback(eplKeySet);
 });
-    /*s3.getObject({Bucket:config.aws_s3_bucket_name,Key:config.aws_s3_key_name},function(err,res){
-        var body=res.Body;
-        var eplKeySet=(body).toString("utf8");
-        callback(eplKeySet);
-    });*/
 }
 eplDriver.prototype.FilterEplDataSet=function(eplDataSet,eplKeySet,callback){
     var EplDataSet=[];
