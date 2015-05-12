@@ -1,0 +1,1 @@
+fixture_history/fixtures/type_name/team_name/current_fixture/next_fixture/team_code/news/team_id/id/status/code/first_name/second_name/goals_scored/assists/clean_sheets/goals_conceded/own_goals/penalties_saved/penalties_missed/yellow_cards/red_cards/saves/element_type/team/event_total/total_points/web_name/special/chance_of_playing_this_round 
