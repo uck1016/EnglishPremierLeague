@@ -2,7 +2,8 @@
  * Created by chaitanyakrishna on 4/2/2015.
  */
 var mongoClient=require("mongodb").MongoClient;
-var url="mongodb://localhost:27017/test";
+var globals=require("../../globals");
+var config=new globals();
 var router=require("express").Router();
 var team_abbr;
 
@@ -18,9 +19,9 @@ function getTeamBrief(teamName,callback){
     var pointsRecord;
     var upcomingMatches=[];
     var last3Matches=[]
-    mongoClient.connect(url,function(err,db){
-        var collection=db.collection("eplpointstable");
-        var collection_epldata=db.collection("epldata");
+    mongoClient.connect(config.url,function(err,db){
+        var collection=db.collection(config.pointsTable_collection);
+        var collection_epldata=db.collection(config.players_collection);
         collection.findOne({"_id":teamName},function(err,data){
             pointsRecord=data;
             collection_epldata.findOne({"team_name":teamName},{"fixture_history.all":{"$slice":-3},"fixture_summary.all":1},function(err,data){
