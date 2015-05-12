@@ -1,0 +1,166 @@
+<div class="container-fluid">
+<div class="row">
+    <div class="col xs-12 col-sm-7 col-md-7">
+            <div id="carousel-team" class="carousel slide" data-ride="carousel">
+                <!-- Indicators &ndash;&gt;-->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-team" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-team" data-slide-to="1"></li>
+                </ol>
+
+                <!-- Wrapper for slides &ndash;&gt;-->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img class="carousel-image" src="./team-profiles/{{teamName}}/1.jpg" alt="./team-profiles/Arsenal/1.jpg">
+                        <div class="carousel-caption">
+                            <p style="margin-bottom: 20%;margin-right: -120%"><rank>#{{position}}</rank></p>
+                            <table class="table" style="background-color: rgba(21, 28, 7, 0.50);">
+                                <tr class="something cell" style="background: none">
+                                    <th>PL</th>
+                                    <th style="color:#449d44">W</th>
+                                    <th style="color: red">L</th>
+                                    <th>D</th>
+                                    <th>GF</th>
+                                    <th>GA</th>
+                                    <th>GD</th>
+                                    <th>Pts</th>
+                                </tr>
+                                <tr class="something cell">
+                                    <td>{{teamBrief["totaPlayed"]}}</td>
+                                    <td>{{teamBrief["win"]}}</td>
+                                    <td>{{teamBrief["lost"]}}</td>
+                                    <td>{{teamBrief["draw"]}}</td>
+                                    <td>{{teamBrief["goals_forwarded"]}}</td>
+                                    <td>{{teamBrief["goals_allowed"]}}</td>
+                                    <td>{{teamBrief["goal_difference"]}}</td>
+                                    <td><span class="badge badge-highlight">{{teamBrief["points"]}}</span></td>
+                                </tr>
+                                </table>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img class="carousel-image" src="./team-profiles/{{teamName}}/1.jpg" alt="./carousel.jpg">
+                        <div class="carousel-caption">
+                            <div class="carousel-detail">
+                            <p style="font-size:15px">Prev:{{teamBrief["last3matches"][2]}}</p>
+                            <p style="font-size:25px">Next: {{teamBrief["upcomingMatches"][0][1]}}</p>
+                                <p> {{teamBrief["upcomingMatches"][0][2]}}</p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls &ndash;&gt;-->
+                <a class="left carousel-control" href="/profile{{teamName}}/#carousel-team" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="/profile{{teamName}}/#carousel-team" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <section class="schedule">
+            <table name="briefTable " class=" previous-matches table table-responsive table-condensed">
+                <tr class="bg-primary">
+                <th >Last 3 Fixtures</th>
+                <th >Next 3 Fixtures</th>
+                </tr>
+                <tr class="bg-info" ng-repeat="match in teamBrief['upcomingMatches']">
+                <td style="background-color:lightgoldenrodyellow">{{teamBrief["last3matches"][2-$index]}}</td>
+                    <td>{{match[1]}} {{match[2]}}</td>
+                </tr>
+            </table>
+        </section>
+        <section class="panel panel-primary" ><div class="panel-heading text-center"><em><b>SQUAD <span class="badge">{{squad.length}}</span></b></em></div></section>
+
+    <ul class="nav nav-pills nav-justified">
+        <li role="presentation" class="bg-danger"><a role="button" ng-click="counter[0]=counter[0]+1;validateCounter(counter[0],0)">
+                <em><b>Attack<br><span class="badge">{{strikers.length}}</span><span ng-hide="showDropDown[0]" class="caret"></span>
+                <span  ng-hide="showDropUp[0]" class="dropup" >
+                            <span class="caret"></span>
+                </span></br></b></em></a>
+        </li>
+        <li role="presentation" class="bg-warning"><a role= "button"  ng-click="counter[1]=counter[1]+1;validateCounter(counter[1],1)">
+                <em><b>Midfield<br><span class="badge">{{midfielders.length}}</span>
+                    <span ng-hide="showDropDown[1]" class="caret"></span>
+                <span  ng-hide="showDropUp[1]" class="dropup" >
+                            <span class="caret"></span>
+                </span>
+                </br></b></em></a>
+        </li>
+        <li role="presentation" class="bg-success"> <a role="button" ng-click="counter[2]=counter[2]+1;validateCounter(counter[2],2)" onclick="window.scrollTo(0,20000)">
+
+                <em><b>Defence<br><span class="badge">{{defenders.length}}</span><span ng-hide="showDropDown[2]" class="caret"></span>
+                <span  ng-hide="showDropUp[2]" class="dropup" >
+                            <span class="caret"></span>
+                </span></br></b></em>
+
+        </a></li>
+        <li role="presentation" class="bg-info"> <a role="button"  ng-click="counter[3]=counter[3]+1;validateCounter(counter[3],3)">
+                <em><b>
+                    Goalkeeping<br><span class="badge">{{goalKeepers.length}}</span>
+                    <span ng-hide="showDropDown[3]" class="caret"></span>
+                <span  ng-hide="showDropUp[3]" class="dropup" >
+                            <span class="caret"></span>
+                </span></br>    </b></em></a>
+        </li>
+    </ul>
+        <div class="row player-item"ng-hide="show[0]">
+            <div ng-repeat="player in strikers" class="col col-xs-3 col-sm-3 col-md-3 col-sm-offset-0 col-md-offset-0">
+                <a role="button" ng-href="" ng-click="getPlayer(player._id)"> <img class=" player-thumbnail bg-danger img-responsive" src="striker-icon2.png" alt="PlayerPic" >
+                    <h5> {{player.web_name}}</h5></a>
+                </div>
+            </div>
+
+            <div class="row player-item " ng-hide="show[1]">
+                <div ng-repeat="player in midfielders" class="col col-xs-3 col-sm-3 col-md-3 col-sm-offset-0 col-md-offset-0">
+                    <a role="button" ng-href="" ng-click="getPlayer(player._id); highlight($index)"><img ng-class="{'selected-item':$index==selectedIndex}" class=" player-thumbnail bg-warning img-responsive " src="/midfielder-icon.png" alt="PlayerPic">
+                        <h5> {{player.web_name}}</h5></a>
+                    </div>
+            </div>
+
+            <div class="row player-item" ng-hide="show[2]">
+                <div ng-repeat="player in defenders" class="col col-xs-3 col-sm-3 col-md-3 col-sm-offset-0 col-md-offset-0">
+                    <a role="button" ng-href="" ng-click="getPlayer(player._id)"><img class="player-thumbnail bg-success img-responsive" src="/defender-icon.png" alt="PlayerPic">
+                        <h5> {{player.web_name}}</h5>
+                    </a>
+                </div>
+            </div>
+        <div class="row player-item"  ng-hide="show[3]">
+            <div ng-repeat="player in goalKeepers" class="col col-xs-3 col-sm-3 col-md-3 col-sm-offset-0 col-md-offset-0">
+                <a role="button" ng-href="" ng-click="getPlayer(player._id)"><img class="player-thumbnail bg-info img-responsive" src="/goal-keeper-icon1.png" alt="PlayerPic" >
+                    <h5> {{player.web_name}}</h5>
+                </a>
+        </div>
+    </div>
+        <section class="panel panel-primary" ><div class="panel-heading text-center"><em><b>TEAM STATS</b></em></div></section>
+
+<div><h2 class="sub-header"></h2></div>
+    </div>
+   <div class="col-sm-5 col-md-5 right-side-bar">
+       <div ng-hide="0" class="club-profile">
+           <img class="img-responsive" src="data:image/png;base64,{{teamBrief['logo_url']}}" alt="...">
+
+               <h1 class="sub-header"></h1>
+           <!--<blockquote><p >Established</p>
+               <p>Manager : {{teamName}}</p>
+                   <p> Stadium: {{playerDetail.type_name}}</p>
+
+               </blockquote>-->
+       </div>
+
+       <h2 class="sub-header"></h2>
+       <div ng-hide="showPlayer" class="player-profile" style="">
+           <!--<img class="img-responsive" src="/striker-icon2.png" style="background-color: lightcyan" alt="...">-->
+
+           <blockquote><p class="text-left"><b style="font-size: x-large">{{playerDetail.first_name}} {{playerDetail.second_name}}</b></p> <p><b style="font-size: large">{{playerDetail.type_name}}</b></p>
+           <blockquote><p class="text-left"><span class="label label-success">Goals</span> : <span class="badge-focus">{{playerDetail.goals_scored}}</span></p>
+           <p class="text-left"><span class="label label-info">Assists</span> : <span class="badge-focus">{{playerDetail.assists}}</span></p>
+           <p class="text-left"><span class="label label-warning">Yellows</span> : <span class="badge-focus">{{playerDetail.yellow_cards}}</span></p>
+           <p class="text-left"><span class="label label-danger">Reds</span> : <span class=" badge-focus">{{playerDetail.red_cards}}</span></p>
+       </blockquote>
+           </blockquote></div>
+    </div>
+    </div>
+    </div>

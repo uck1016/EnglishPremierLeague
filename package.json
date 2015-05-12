@@ -1,0 +1,20 @@
+{
+  "name": "english-premier-league-staistics",
+  "version": "0.0.1",
+  "dependencies": {
+    "aws-sdk": "^2.1.18",
+    "body-parser": "^1.12.0",
+    "config": "^1.12.0",
+    "express": "^4.12.0",
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-stylus": "^2.0.1",
+    "lodash": "^3.6.0",
+    "mongo-factory": "^0.6.1",
+    "mongodb": "^1.4.32",
+    "mongoose": "^3.8.24",
+    "node-rest-client": "^1.4.4",
+    "request": "^2.53.0",
+    "sync-request": "^2.0.1"
+  }
+}

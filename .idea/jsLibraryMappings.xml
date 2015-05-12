@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{EPL node_modules}" />
+    <file url="file://$PROJECT_DIR$/Extras/dbTest.js" libraries="{Node.js Globals, Node.js v0.10.36 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/controllers/api/GenerateStandingsTable.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/controllers/api/GetMatchResults.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/controllers/api/GetUpcomingMatchSchedule.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/eplDAO.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/gulp/css.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/gulpfile.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/helpers.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/ng/route.js" libraries="{Node.js Globals, Node.js v0.10.36 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/server.js" libraries="{Node.js Globals}" />
+  </component>
+</project>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>EPL Points Table</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/customLayout.css" rel="stylesheet">
+</head>
+
+<body ng-controller="StatisticsController" ng-app="epl">
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top epl-color">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">EPL 2015</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="/upcomingMatches.html">Upcoming</a></li>
+                <li><a href="/#/profile/0">Teams</a></li>
+                <li><a role="button" ng-click="" href="/standings.html">Standings</a></li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/tournamentStats.html">Tournament Stats</a></li>
+                        <li><a href="">Team Stats</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- Begin page content -->
+<!--<div class="background"></div>-->
+<div class="container" style="background:linear-gradient(lavenderblush, lavender)">
+    <div class="row">
+        <div class=" col-xs-7 col-sm-7 col-md-7">
+            <div class="row" style="background-color: gray">
+                <div class="col-xs-3 col-sm-3 col-md-3 total-goals bg-warning  ">
+                    <h4 class="text-center">Total Goals</h4>
+                    <p style="text-align: center; font-size: xx-large; font-weight: bolder">{{total_goals}}</p>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 each-category" style="background: lightcoral">
+                    <img class=" player-thumbnail-statistics img-responsive" style="background: lightcoral" src="striker-icon2.png" alt="PlayerPic" >
+                    <h4 class="quote">A</h4>
+                    <p class="badge-position-goals">{{totalGoalStats[0]['goals']}}</p>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 each-category bg-primary ">
+                    <img class=" player-thumbnail-statistics bg-primary img-responsive" src="midfielder-icon.png" alt="PlayerPic" >
+                    <h4 class="text-left">M</h4>
+                    <p class="badge-position-goals">{{totalGoalStats[1]['goals']}}</p>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 each-category" style="background: darkseagreen;">
+                    <img class=" player-thumbnail-statistics img-responsive" style="background: darkseagreen" src="defender-icon.png" alt="PlayerPic" >
+                    <h4 class="text-left">D</h4>
+                    <p class="badge-position-goals">{{totalGoalStats[2]['goals']}}</p>
+                </div>
+            </div>
+    <div ng-repeat="team in teams" class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 team-name-stat ">
+                <p style="text-align: center; margin-top: 20%; font-size:large">{{team._id}} <b class="badge-goals">{{team.total_goals}}</b></p>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 each-type-stat" style="background-color: lightcoral">
+                <p class="text-center badge-focus">{{team['categories'][0].goals_scored}}</p>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 each-type-stat bg-primary">
+            <p class="text-center badge-focus">{{team['categories'][1].goals_scored}}</p>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 each-type-stat" style="background-color: darkseagreen">
+            <p class="text-center badge-focus">{{team['categories'][2].goals_scored}}</p>
+        </div>
+    </div>
+           </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 right-side-bar">
+            <section class="panel panel-primary" ><div class="panel-heading text-center"><em><b>Top 5 Goal-scorers</b></em></div></section>
+            <blockquote>
+                <ul class="media-list">
+                    <li ng-repeat="player in top_scorers" class="media">
+                        <div class="media-body">
+                            <blockquote><p><b style="color: darkslateblue;">{{player['_id']['first_name']}} {{player['_id']['second_name']}}</b> | {{player['_id']['team_name']}}</p></blockquote>
+                        </div>
+                        <div class="media-right">
+                            <p style="font-size: xx-large; font-weight: bolder; font-style: italic;">{{player['_id']['goals']}}</p>
+                        </div>
+                    </li>
+                </ul>
+                </blockquote>
+            <section class="panel panel-success" ><div class="panel-heading text-center"><em><b>Top 5 Goal-Keepers (saves)</b></em></div></section>
+            <blockquote>
+                <ul class="media-list">
+                    <li ng-repeat="player in top_keepers" class="media">
+                        <div class="media-body">
+                            <blockquote><p><b style="color: mediumseagreen;">{{player['_id']['first_name']}} {{player['_id']['second_name']}}</b> | {{player['_id']['team_name']}}</p></blockquote>
+                        </div>
+                        <div class="media-right">
+                            <p style="font-size: xx-large; font-weight: bolder; font-style: italic;">{{player['_id']['saves']}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">live.inside.soccer</p>
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
+<script src="/epl.js"></script>
+</body></html>

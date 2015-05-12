@@ -1,0 +1,454 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.epl-color{
+    background-color: #222222;
+    z-index:10000;
+}
+.custom{
+    width: 85em;
+    height:65em;
+    overflow-style: auto;
+}
+.background{
+    position: absolute;
+    height:100%;
+    width:100%;
+    background-image: url(EPL_trophy.jpg);
+    background-size: cover;
+    opacity: .5;
+}
+.background_alt{
+    position: absolute;
+    height:100%;
+    width:100%;
+    background-image: url(EPL_trophy2.jpg);
+    background-size: cover;
+    opacity: .5;
+}
+.epl-table{
+    position: absolute;
+}
+
+/*.custom div:not(.page-header) {
+position: absolute;
+    top: 40%;
+    left:45%;
+    width: 85px;
+    height:85px;
+    transition: width 1s, height 1s,transform 2s;
+}*/
+.footer {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+   /*Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #222222;
+    border: 1px solid;
+    border-top-color: #cccccc;
+}
+.badge-highlight{
+    background-color: lightblue;
+}
+/*.custom div:not(.page-header):hover{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    z-index: auto;
+}*/
+.peer{
+    position: absolute;
+    top: 38%;
+    left:47%;
+    width: 85px;
+    height:85px;
+    transition: width 1s, height 1s,transform .5s, opacity 1s;
+    background-size: cover;  background-repeat: no-repeat;
+    border-radius: 40%;
+    box-shadow: 0px 0px 100px 20px #f2ff98;
+}
+.peer:hover{
+    z-index:9999;
+    position: absolute;
+    top: 38%;
+    left:47%;
+    width: 200px;
+    height: 200px;
+    opacity: 5;
+}
+
+.peer .overview{
+    position: relative;
+    height: 100%;
+    width:100%;
+    border-radius: 40%;
+    opacity:0;
+    font-size: 20px;
+    transition: opacity 1s,font-size 1s;
+    background-color: rgba(21, 28, 7, 0.70);
+}
+.peer:hover .overview {
+    opacity: 3;
+    text-shadow: 0 0 .1em black;
+    font-size: 23px;
+}
+.list-unstyled{
+    position:relative;
+    top:20%;
+    margin-left: 3%;
+    margin-right: 4%;
+}
+.zoom-img{
+transition: width 2s,height 2s;
+}
+.zoom-img:hover{
+    height: 400px;
+    width:400px;
+}
+.simplelist{
+    margin-left: 50%;
+}
+.peer .indicator{
+    position:absolute;
+    top:-20px;
+    left:0%;
+    font-size: 30px;
+    color:red;
+    transition: all 1s;
+}
+.peer:hover .indicator{
+    position:absolute;
+    top:-50px;
+    left:30%;
+    font-size:50px;
+    z-index:1;
+}
+.label-as-badge{
+    border-radius: 100%;
+}
+/*body:before{
+    background-image: url(EPL_trophy.jpg);
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity:.3;
+}*/
+body > .simplelist{
+    margin-left: 50%;
+}
+/*.table-nonfluid {
+    position: relative;
+    margin-top: 5%;
+    margin-left:0%;
+    width:  auto!important;
+    height:auto!important;
+    max-width: 50%;
+}*/
+.cell tr{
+    padding: 0 0 0 0;
+}
+.cell td{
+    font-size: small;
+}
+.panel-nonfluid {
+    margin-left: 60%;
+    width: 35%
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding-top: 70px;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+.deg36 {
+    transform: rotate(36deg) translate(34em) rotate(-36deg);
+}
+.deg72 {
+    transform: rotate(60deg) translate(13em) rotate(-60deg);
+}
+.deg108 {
+    transform: rotate(120deg) translate(13em) rotate(-120deg);
+}
+.deg144 {
+    transform: rotate(144deg) translate(34em) rotate(-144deg);
+}
+.deg180 {
+    transform: rotate(180deg) translate(33em) rotate(-180deg);
+}
+.deg216 {
+    transform: rotate(216deg) translate(34em) rotate(-216deg);
+}
+.deg252 {
+    transform: rotate(240deg) translate(13em) rotate(-240deg);
+}
+.deg288 {
+    transform: rotate(300deg) translate(13em) rotate(-300deg);
+}
+.deg324 {
+    transform: rotate(324deg) translate(34em) rotate(-324deg);
+}
+.deg360 {
+    transform: rotate(360deg) translate(33em) rotate(-360deg);
+}
+.deg18 {
+    transform: rotate(18deg) translate(25em) rotate(-18deg);
+}
+.deg54 {
+    transform: rotate(54deg) translate(25em) rotate(-54deg);
+}
+.deg90 {
+    transform: rotate(180deg) translate(13em) rotate(-180deg);
+}
+.deg126 {
+    transform: rotate(126deg) translate(25em) rotate(-126deg);
+}
+.deg162 {
+    transform: rotate(162deg) translate(25em) rotate(-162deg);
+}
+.deg198 {
+    transform: rotate(198deg) translate(25em) rotate(-198deg);
+}
+.deg234 {
+    transform: rotate(234deg) translate(25em) rotate(-234deg);
+}
+.deg270 {
+    transform: rotate(360deg) translate(13em) rotate(-360deg);
+}
+.deg306 {
+    transform: rotate(306deg) translate(25em) rotate(-306deg);
+}
+.deg342 {
+    transform: rotate(342deg) translate(25em) rotate(-342deg);
+}
+/*.row{
+    margin-top: 5%;
+}*/
+.selected-item{
+    background-color: cornflowerblue;
+}
+.panel{
+    padding: 0;
+    margin-bottom: 1%;
+    /*transform: skewX(170deg);*/
+}
+.panel-heading{
+font-size: large;
+    color: #ed9c28;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+}
+.panel-heading .badge{
+    font-size: large;
+
+}
+.thumbnail{
+    border-radius: 100%;
+}
+.left-nav{
+    padding: 5px;
+}
+
+.left-nav:hover{
+    background-color: cornflowerblue;
+}
+.player-item{
+    margin-top: 5%;
+    position: relative;
+    left: 5%;
+    max-width: 95%;
+    background-color: lightsteelblue;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-shadow: 0px 0px 20px 10px darkseagreen;
+}
+h5{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.dropUp{
+    transform: rotate(180deg);
+}
+.playerDashboard{
+
+}
+.background-left-nav{
+    position:absolute;
+    height: 100%;
+    width:100%;
+    background: linear-gradient(red, blue)
+    background-clip: padding-box;
+}
+.carousel-image{
+    background-size: cover;
+    opacity: .5;
+}
+.player-profile{
+    border: none;
+    font-size: large;
+    background-size: auto;
+    border-radius: 1%;
+    box-shadow: 0px 0px 50px 10px #f2ff98;;
+    background: rgba(22, 28, 67, 0.50);;
+}
+.club-profile{
+    font-size: large;
+}
+
+th, tr{
+    font-size: medium;
+
+}
+rank{
+    font-size: 50px;
+    font-style: italic;
+    background-color: rgba(21, 28, 7, 0.50);
+    padding: 8px;
+    border-radius: 100%;
+    color: gold;
+}
+.carousel-detail{
+    font-weight: 500;
+    background-color: rgba(21, 28, 7, 0.50);
+}
+.previous-matches{
+    margin-top: 2%;
+    border: none;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.previous-matches th {
+    text-transform: uppercase;
+    text-align: justify;
+}
+
+.upcoming-matches{
+    margin-top: 3%;
+    max-width: 60%;
+}
+.player-thumbnail{
+    height:50px;
+    width:50px;
+}
+.player-thumbnail:hover{
+    background-color: cornflowerblue;
+}
+
+.squad{
+    padding:3px;
+    text-align: center;
+    font-weight: bold;
+    font-style:italic;
+    font-size: large;
+}
+.squad .badge{
+    font-size: large;
+}
+.match-schedule tr td{
+    font-size: small;
+}
+.result-schedule tr td{
+    font-size: small;
+}
+ins{
+    font-size: x-small;
+    font-weight: bold;
+}
+.badge-focus{
+    position: relative;
+    color: gold;
+    font-size: 50px;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+    border-radius: 100%;
+    top: 10px;
+}
+.each-fixture{
+    background: peachpuff;
+    border-right: double;
+    min-height: 100px;
+    padding-bottom: 4px;
+}
+.upcoming{
+    margin-bottom: 10%;
+    margin-left: 10%;
+    font-style: normal;
+}
+.each-type-stat{
+    min-height: 50px;
+    max-width: 155px;
+    margin: .5em .5em .5em;
+}
+.team-name-stat{
+    min-height: 100px;
+    background: linear-gradient(palegoldenrod,darkkhaki);
+    margin-bottom: .5em;
+    border-radius: 2%;
+}
+.total-goals{
+    min-height: 100px;
+    margin-bottom: .5em;
+    border-radius: 2%;
+    border-bottom-right-radius: 100%;
+}
+.each-category{
+    min-height: 100px;
+    border-radius: 2%;
+}
+.player-thumbnail-statistics{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+.badge-goals{
+    font-size: x-large;
+    font-style: italic;
+    border-radius: 25%;
+    background-color: lavender;
+    padding: 2px;
+}
+.badge-position-goals{
+    font-size: x-large;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 30%;
+    background-color: lavender;
+    padding: 2px;
+    margin-top:25%;
+    margin-left: 63%;
+    position: relative;
+    color: black;
+}
+.quote{
+    opacity: 0;
+}
+.quote:hover{
+    opacity: 1;
+}
+.goal-scorers{
+    position: absolute;
+    background-image: url("striker-icon2.png");
+    width: 100%;
+    height: 100%;
+    opacity: .2;
+}
