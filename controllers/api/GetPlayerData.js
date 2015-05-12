@@ -13,8 +13,8 @@ router.post("/api/getPlayerData",function(req,res){
     })
 })
 function getPlayerInfo(playerId,callback){
-    mongoClient.connect(url,function(err,db){
-        var collection=db.collection("epldata");
+    mongoClient.connect(config.url,function(err,db){
+        var collection=db.collection(config.players_collection);
         collection.find({"_id":playerId},{first_name:1,second_name:1,type_name:1,goals_scored:1,assists:1,yellow_cards:1,red_cards:1},function(err,data){
             data.toArray(function(err,res){
             console.log(res);

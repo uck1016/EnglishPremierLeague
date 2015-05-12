@@ -80,10 +80,10 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
 }
 eplDriver.prototype.StoreToMongo=function(eplDataSet){
     mongo_factory.getConnection(config.url).then(function(db){
-        db.dropCollection("epldata",function(){
+        db.dropCollection(config.players_collection,function(){
             console.log("dropping existing collection");
         });
-        var epldata=db.collection("epldata");
+        var epldata=db.collection(config.players_collection);
         epldata.insert(eplDataSet,{w:1},function(err,res){
             //assert.equals(null,err);
             console.log("updating database")
