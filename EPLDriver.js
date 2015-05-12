@@ -36,7 +36,6 @@ eplDriver.prototype.FilterEplDataSet=function(eplDataSet,eplKeySet,callback){
     var EplDataSet=[];
     var requiredAttributes=eplKeySet.split("/");
     for(var j in eplDataSet){
-         //console.log(Object.keys(eplDataSet[j]).length);
         var itemKeySet=Object.keys(eplDataSet[j]);
         for(var attribute in itemKeySet){
             if(requiredAttributes.indexOf(itemKeySet[attribute])==-1){
