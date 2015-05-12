@@ -9,7 +9,7 @@ var config=function(){
     this.dbName="epl2015";
     this.players_collection="epldata";
     this.teams_collection="teams_collection";
-    this.pointsTable_collection="eplherokpointstable";
+    this.pointsTable_collection="eplpointstable";
 
     this.playerURL="http://fantasy.premierleague.com/web/api/elements/";
     this.aws_s3_bucket_name="epl-repository";
