@@ -15,6 +15,9 @@ router.get("/api/teams",function(req,res){
 function getTeams(callback){
     mongoClient.connect(config.url,function(err,db) {
         var collection = db.collection(config.pointsTable_collection);
+        collection.find({}).toArray(function(err,data){
+            console.log(data.length);
+        })
         collection.find().sort({"points":-1,"goal_difference":-1}).toArray(function (err, data) {
             db.close();
             callback(data);
