@@ -18,7 +18,7 @@ function getTeams(callback){
         collection.find().sort({"points":-1,"goal_difference":-1}).toArray(function (err, data) {
             var result=data;
 console.log("******* inside get teams"+data.length);
-                db.close();
+                //db.close();
                 callback(result);
         })
     })
