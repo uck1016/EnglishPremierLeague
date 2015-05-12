@@ -16,8 +16,8 @@ function getTeams(callback){
     mongoClient.connect(config.url,function(err,db) {
         var collection = db.collection(config.pointsTable_collection);
         collection.find().sort({"points":-1,"goal_difference":-1}).toArray(function (err, data) {
-            var result=data
-
+            var result=data;
+console.log("******* inside get teams"+data.length);
                 db.close();
                 callback(result);
         })
