@@ -189,7 +189,7 @@ function uploadLogos(team_logo_files){
             //console.log(data);
             setTimeout(function(){
                 db.close();
-            },1000);
+            },2000);
         })
 
     }
