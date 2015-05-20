@@ -7,7 +7,6 @@
                     <li data-target="#carousel-team" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-team" data-slide-to="1"></li>
                 </ol>
-
                 <!-- Wrapper for slides &ndash;&gt;-->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
@@ -64,11 +63,11 @@
             <table name="briefTable " class=" previous-matches table table-responsive table-condensed">
                 <tr class="bg-primary">
                 <th >Last 3 Fixtures</th>
-                <th >Next 3 Fixtures</th>
+                <th >Upcoming Fixtures</th>
                 </tr>
-                <tr class="bg-info" ng-repeat="match in teamBrief['upcomingMatches']">
+                <tr class="bg-info" ng-repeat="match in teamBrief['last3matches']">
                 <td style="background-color:lightgoldenrodyellow">{{teamBrief["last3matches"][2-$index]}}</td>
-                    <td>{{match[1]}} {{match[2]}}</td>
+                    <td>{{teamBrief["upcomingMatches"][$index][1] }} :  {{teamBrief["upcomingMatches"][$index][2]}}</td>
                 </tr>
             </table>
         </section>
