@@ -44,7 +44,6 @@ eplDriver.prototype.FilterEplDataSet=function(eplDataSet,eplKeySet,callback){
         }
     }
     callback(eplDataSet);
-
 }
 eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
     //Modifying the date string to date object in the key name "fixtures.all" holding all upcoming fixtures
@@ -74,7 +73,7 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
 eplDriver.prototype.StoreToMongo=function(eplDataSet){
     mongo_factory.getConnection(config.url).then(function(db){
         db.dropCollection(config.players_collection,function(){
-            console.log("dropping existing collection");
+            console.log("dropping existing collections");
         });
         var epldata=db.collection(config.players_collection);
         epldata.insert(eplDataSet,{w:1},function(err,res){
