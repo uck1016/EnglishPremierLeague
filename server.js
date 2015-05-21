@@ -28,7 +28,7 @@ EplDriver.GetDataFromAPI(function(eplDataSet){
 setTimeout(function(){
 
 var startEPL=require("./bootstrapEPL");
-
+setTimeout(function(){
 app.use(require("./controllers/api/teams"));
 app.use(require("./controllers/api/GenerateStandingsTable"));
 app.use(require("./controllers/api/GetUpcomingMatchSchedule"));
@@ -45,4 +45,4 @@ app.use(require("./controllers/api/GetStatsByTournament"));
 app.listen(process.env.PORT||4545,function(){
     console.log("server listening on",4545)
 })
-},50000);
+},3000)},50000);

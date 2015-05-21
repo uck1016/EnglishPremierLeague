@@ -3,7 +3,6 @@
  */
 var globals=require("./globals");
 var config=new globals();
-var mongo_factory=require("mongo-factory");
 var eplDAO=require("./eplDAO");
 eplDAO=new eplDAO();
 //eplDAO.AccumulateLogos();
