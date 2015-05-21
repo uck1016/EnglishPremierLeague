@@ -42,7 +42,7 @@ app.use(require("./controllers/api/GetUpcomingMatchesByTeam"));
 app.use(require("./controllers/api/GetGoalStatsByTeam"));
 app.use(require("./controllers/api/GetStatsByTournament"));
 
-app.listen(process.env.PORT || 4545,function(){
+app.listen(process.env.PORT,function(){
     console.log("server listening on",4545)
 })
-},75000);
+},60000);

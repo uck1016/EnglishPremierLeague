@@ -3,7 +3,7 @@
  */
 var config=function(){
     //var urll=process.env.MONGOLAB_URI+"/test";
-    this.url= process.env.MONGOLAB_URI+"/test"|| "mongodb://localhost:27017/test";
+    this.url= process.env.MONGOLAB_URI+"/test"||"mongodb://localhost:27017/test";
     this.port=4545;
     this.host="localhost";
 
