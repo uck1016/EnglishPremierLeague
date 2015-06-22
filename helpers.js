@@ -1,5 +1,6 @@
 /**
  * Created by chaitanyakrishna on 4/8/2015.
+ Typically a Driver module that handles all the intermediate business logic implemented at the run time of the application.
  */
 var helper=function(){
 

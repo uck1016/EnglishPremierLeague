@@ -3,14 +3,14 @@
  */
 var config=function(){
     var heroku_mongo_url=process.env.MONGOLAB_URI+"/test";
-    this.url=heroku_mongo_url || "mongodb://localhost:27017/test";
+    this.url= "mongodb://localhost:27017/EPL15";
     this.port=4545;
     this.host="localhost";
 
     this.dbName="epl2015";
-    this.players_collection="epldata";
-    this.teams_collection="teams_collection";
-    this.pointsTable_collection="eplpointstable";
+    this.players_collection="epldata2015";
+    this.teams_collection="teams_collection2015";
+    this.pointsTable_collection="eplpointstable2015";
 
     this.playerURL="http://fantasy.premierleague.com/web/api/elements/";
     this.aws_s3_bucket_name="epl-repository";

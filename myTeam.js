@@ -1,5 +1,6 @@
 /**
  * Created by chaitanyakrishna on 3/5/2015.
+ Module to represent all the properties of the team Object, which are required by the application.
  */
 var _id, team_id,totalPlayed, win, lost, draw, goals_forwarded, goals_allowed, goal_difference,points,nex_match;
 

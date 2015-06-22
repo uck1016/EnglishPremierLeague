@@ -5,9 +5,9 @@
 var router=require("express").Router();
 var mongoClient=require("mongodb").MongoClient;
 var _=require("lodash");
-var globals=require("../../globals");
+var globals=require("../../Globals");
 var config=new globals();
-var helpers=require("../../helpers")
+var helpers=require("../../Helpers")
 var helper=new helpers();
 //Holds th final weekly matchSchedule details
 var games={};

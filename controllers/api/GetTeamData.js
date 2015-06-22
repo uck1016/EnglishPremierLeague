@@ -2,7 +2,7 @@
  * Created by chaitanyakrishna on 3/28/2015.
  */
 var mongoClient=require("mongodb").MongoClient;
-var globals=require("../../globals");
+var globals=require("../../Globals");
 var config=new globals();
 var router=require("express").Router();
 var squad=[];

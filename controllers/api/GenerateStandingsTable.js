@@ -3,7 +3,7 @@
  */
 var mongoClient=require("mongodb").MongoClient;
 var _=require("lodash");
-var globals=require("../../globals");
+var globals=require("../../Globals");
 var config=new globals();
 var router=require("express").Router();
 

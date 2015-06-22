@@ -1,19 +1,19 @@
 /**
  * Created by chaitanyakrishna on 3/23/2015.
  */
-
-var globals=require("./globals");
+//globals module is having all the globals variables required by the application
+var globals=require("./Globals");
 var config=new globals();
-var mongo_factory=require("mongo-factory");
+var mongoClient=require("mongodb").MongoClient;
 var fs=require("fs");
-//var syncRequest=require("sync-request");
 var request = require("request");
 var assert= require("assert");
 
 var eplDriver =function(){
 
 }
-eplDriver.prototype.GetDataFromAPI=function(cb){
+//Method to create the REST client and consume the response for each request.
+eplDriver.prototype.GetDataFromAPI=function(callback){
     var eplDataSet=[];
     for(var i=1;i<691;i++) {
         var playerURI=config.playerURL+i+"/";
@@ -23,15 +23,17 @@ eplDriver.prototype.GetDataFromAPI=function(cb){
         });
     }
     setTimeout(function(){
-        cb(eplDataSet);
+        callback(eplDataSet);
     },60000);
 };
+//Method to read a configuration file containing the attributes (keys) required for the player Object
 eplDriver.prototype.getEplKeySet=function(callback){
 fs.readFile("./assets/eplKeySet.txt",function(err,data){
     var eplKeySet=(data).toString("utf8");
     callback(eplKeySet);
 });
 }
+//Method to extract only the desired key-value pairs from each object in the eplDataSet
 eplDriver.prototype.FilterEplDataSet=function(eplDataSet,eplKeySet,callback){
     var EplDataSet=[];
     var requiredAttributes=eplKeySet.split("/");
@@ -70,19 +72,20 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
     }
     callback(eplDataSet);
 }
+//Method to store the data objects in mongoDB server.
 eplDriver.prototype.StoreToMongo=function(eplDataSet){
-    mongo_factory.getConnection(config.url).then(function(db){
+    mongoClient.connect(config.url,function(err,db){
         db.dropCollection(config.players_collection,function(){
             console.log("dropping existing collections");
         });
         var epldata=db.collection(config.players_collection);
         epldata.insert(eplDataSet,{w:1},function(err,res){
             //assert.equals(null,err);
+            console.log(res);
             console.log("updating database")
             db.close();
         })
-
-    })
+    });
 }
 eplDriver.prototype.Test=function(){
 

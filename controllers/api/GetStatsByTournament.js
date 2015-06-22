@@ -5,7 +5,7 @@
 var router=require("express").Router();
 var mongoClient=require("mongodb").MongoClient;
 var _=require("lodash");
-var globals=require("../../globals");
+var globals=require("../../Globals");
 var config=new globals();
 
 router.get("/api/totalGoals",function(req,res){

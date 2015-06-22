@@ -1,12 +1,15 @@
 /**
  * Created by chaitanyakrishna on 2/27/2015.
+ * eplDAO is a Module defined to heavily interact with the MongoDB server and performs the operations that need to
+ * executed before any request is made to the database, So it has the key operations to create all critical collections in
+ * MongoDB.
  */
-var globals=require("./globals");
+var globals=require("./Globals");
 var config=new globals();
 
-var helper=new require("./helpers")();
+var helper=new require("./Helpers")();
 
-var mongo_factory=require("mongo-factory");
+var mongoClient=require("mongodb").MongoClient;
 
 var fs=require("fs");
 //array holding the resource url of logo_image for each team along with the team_id
@@ -22,11 +25,10 @@ var eplDAO=function(){
 //UploadLogos()
 //getTable();
 eplDAO.prototype.getStarted=function(callback) {
-    mongo_factory.getConnection(config.url).then(function(db){
+    mongoClient.connect(config.url,function(err,db){
         db.dropCollection(config.teams_collection,function(){
             console.log("Dropping existing teams collection");
         })
-
         var players_collection = db.collection(config.players_collection);
         var teams_collection = db.collection(config.teams_collection);
 
@@ -41,7 +43,6 @@ eplDAO.prototype.getStarted=function(callback) {
                 "count": {"$first": "$fixture_history.all"}
             }
         }
-
         players_collection.aggregate([match,groupBy], function (err, data) {
             for (var i in data) {
                 //console.log(data[i]._id._id + "*****" + data[i].count.length);
@@ -58,7 +59,6 @@ eplDAO.prototype.getStarted=function(callback) {
         })
     })
 }
-
 //Function to load team logos (image files) from source directory,
 //sort them alphabetically w.r.t team name and assign a ID to each logo which is in consistent with team_id of the original data set
 eplDAO.prototype.AccumulateLogos=function(){
@@ -76,7 +76,7 @@ eplDAO.prototype.AccumulateLogos=function(){
 }
 eplDAO.prototype.GeneratePointsTable=function(callback){
     var upperResult;
-    mongo_factory.getConnection(config.url).then(function(db){
+    mongoClient.connect(config.url,function(err,db){
         var teams_collection=db.collection(config.teams_collection);
         teams_collection.find(function(err,teamsCursor){
             teamsCursor.toArray(function(err, teamsArray){
@@ -89,12 +89,10 @@ eplDAO.prototype.GeneratePointsTable=function(callback){
         })
     })
 }
-
 // function to store the calculated points table into mongodb.
-
 eplDAO.prototype.insertPointsTable=function(pointsTable,callback){
     //console.log(pointsTable);
-    mongo_factory.getConnection(config.url).then(function(db){
+    mongoClient.connect(config.url,function(err,db){
 
         db.dropCollection(config.pointsTable_collection,function(err){
                 console.log("dropped existing collection");
@@ -102,6 +100,7 @@ eplDAO.prototype.insertPointsTable=function(pointsTable,callback){
         var points_table=db.collection(config.pointsTable_collection);
         console.log("bootstrapping collection");
         points_table.insert(pointsTable,function(err,data){
+            db.close();
             callback();
         })
     })
@@ -171,13 +170,11 @@ function uploadLogos(team_logo_files){
  //temporary storage for encoded strings
     var p=1;
     var final_result=[];
-
     for(var i in team_logo_files) {
         var image_string = fs.readFileSync(team_logo_files[i].img_src, "base64");
         final_result.push({"_id":p++,"img_src":image_string});
     }
-
-    mongo_factory.getConnection(config.url).then(function(db){
+    mongoClient.connect(config.url,function(err,db){
         var points_table=db.collection(config.pointsTable_collection);
         var q=0;
     for(var i in final_result) {
@@ -191,9 +188,7 @@ function uploadLogos(team_logo_files){
                 db.close();
             },2000);
         })
-
     }
-
 })
 }
 module.exports=eplDAO;
