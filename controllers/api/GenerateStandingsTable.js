@@ -8,7 +8,6 @@ var config=new globals();
 var router=require("express").Router();
 
 router.get("/api/standings",function(req,res){
-    console.log("*************");
             getTable(function (data) {
                 console.log(data);
                 res.json(data);
