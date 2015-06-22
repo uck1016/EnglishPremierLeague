@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/controllers/api/GetMatchResults.js" libraries="{Node.js Globals}" />
     <file url="file://$PROJECT_DIR$/controllers/api/GetUpcomingMatchSchedule.js" libraries="{Node.js Globals}" />
     <file url="file://$PROJECT_DIR$/eplDAO.js" libraries="{Node.js Globals}" />
+    <file url="file://$PROJECT_DIR$/globals.js" libraries="{Node.js Globals}" />
     <file url="file://$PROJECT_DIR$/gulp/css.js" libraries="{Node.js Globals}" />
     <file url="file://$PROJECT_DIR$/gulpfile.js" libraries="{Node.js Globals}" />
     <file url="file://$PROJECT_DIR$/helpers.js" libraries="{Node.js Globals}" />

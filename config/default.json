@@ -1,9 +1,0 @@
-{
-  "epl2015":{
-    "dbConfig":{
-      "host":"localhost",
-      "port":"27017",
-      "dbName":"test"
-    }
-  }
-}
