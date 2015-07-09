@@ -2,8 +2,9 @@
  * Created by chaitanyakrishna on 4/7/2015.
  */
 var config=function(){
+    var local_mongoURL="mongodb://localhost:27017/EPL15";
     var heroku_mongo_url=process.env.MONGOLAB_URI+"/test";
-    this.url= "mongodb://localhost:27017/EPL15";
+    this.url= heroku_mongo_url;
     this.port=4545;
     this.host="localhost";
 
