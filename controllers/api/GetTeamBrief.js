@@ -46,6 +46,7 @@ function AppendTeamBriefDetails(pointsRecord,upcomingMatches,last3Matches,callba
     var modifiedUpcomingMatches=[];
     for(var i in upcomingMatches){
         var eachMatch=upcomingMatches[i];
+        console.log(eachMatch);
             var item=[];
             item.push(eachMatch[0]);
             var opponent=eachMatch[1].slice(0,3);
@@ -62,7 +63,8 @@ function AppendTeamBriefDetails(pointsRecord,upcomingMatches,last3Matches,callba
                 item.push("TBA")
             }
         if(eachMatch[2]!="-") {
-            item.push(eachMatch[2].toUTCString().slice(0,12) + eachMatch[2].toLocaleTimeString().slice(0,5)+" EST");
+            item.push(eachMatch[2]);
+            //item.push(eachMatch[2].toUTCString().slice(0,12) + eachMatch[2].toLocaleTimeString().slice(0,5)+" EST");
         }else{
             item.push("TBA");
         }

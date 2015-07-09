@@ -15,9 +15,10 @@ var eplDriver =function(){
 //Method to create the REST client and consume the response for each request.
 eplDriver.prototype.GetDataFromAPI=function(callback){
     var eplDataSet=[];
-    for(var i=1;i<691;i++) {
+    for(var i=1;i<491;i++) {
         var playerURI=config.playerURL+i+"/";
         request.get(playerURI,function(err, response, body) {
+            //console.log(body);
             eplDataSet.push(JSON.parse(body));
             //console.log(new Date().getMinutes())
         });
@@ -56,20 +57,22 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
         for(var i in fixtures_all){
             if(fixtures_all[i][0].length>5){
                 var d = GetDate(fixtures_all[i], 0);
+                //console.log(d);
                 eplDataSet[each]["fixtures"]["all"][i][0] = d;
             }
         }
     }
     //Modifying the date string to date object in the key name "fixtures.summary" holding the last three fixtures
-    for(var each in eplDataSet){
+    /*for(var each in eplDataSet){
         var fixtures_summary=eplDataSet[each]["fixtures"]["summary"];
         for(var i in fixtures_summary){
             if(fixtures_summary[i][2].length>5) {
                 var d = GetDate(fixtures_summary[i], 2);
+                //console.log(d);
                 eplDataSet[each]["fixtures"]["summary"][i][2] = d;
             }
         }
-    }
+    }*/
     callback(eplDataSet);
 }
 //Method to store the data objects in mongoDB server.
@@ -92,7 +95,18 @@ eplDriver.prototype.Test=function(){
 }
 function GetDate(item,index){
     var DateInString=item[index];
-    var x= new Date(DateInString.substring(0,7)+"2015"+DateInString.substring(6)+" GMT");
+    var x;
+    if(CheckDateInString(DateInString.substring(3,6)))
+        x= new Date(DateInString.substring(0,7)+"2016"+DateInString.substring(6)+" GMT");
+    else
+        x=new Date(DateInString.substring(0,7)+"2015"+DateInString.substring(6)+" GMT");
     return x;
+}
+
+function CheckDateInString(month){
+    //console.log (month);
+    var next_year_months=["Jan","Feb","Mar","Apr","May"];
+    if(next_year_months.indexOf(month)!=-1)return true;
+    else return false;
 }
 module.exports=eplDriver;

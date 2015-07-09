@@ -73,6 +73,13 @@ angular.module("epl")
  */
 angular.module("epl")
     .controller("PointsTableController",function($scope,PointsTableService,MatchScheduleService,MatchResultsService,$routeParams,$animate,$location) {
+    /*$scope.$on("ws:new_post",function(_,post){
+        $scope.$apply(function(){
+            $scope.note=post;
+            //alert($scope.note);
+        })
+
+    })*/
     PointsTableService.fetch().success(function (standings) {
         if($scope.standings==null) $scope.standings = standings;
     })
@@ -302,3 +309,18 @@ angular.module("epl")
             return $http.get("/api/getUpcomingMatches");
         }
     })
+/**
+ * Created by chaitanyakrishna on 6/28/2015.
+angular.module("epl")
+.run(function($rootScope){
+    var url="ws:localhost:4545";
+    var connection=new WebSocket(url);
+    connection.onopen=function(){
+        console.log("web socket connected");
+    connection.onmessage=function(e){
+        console.log(e);
+        var payload=JSON.parse(e.data)
+        $rootScope.$broadcast('ws:' + payload.topic, payload.data);
+    }
+    }
+})*/

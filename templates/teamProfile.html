@@ -65,9 +65,9 @@
                 <th >Last 3 Fixtures</th>
                 <th >Upcoming Fixtures</th>
                 </tr>
-                <tr class="bg-info" ng-repeat="match in teamBrief['last3matches']">
+                <tr class="bg-info" ng-repeat="match in teamBrief['upcomingMatches']">
                 <td style="background-color:lightgoldenrodyellow">{{teamBrief["last3matches"][2-$index]}}</td>
-                    <td>{{teamBrief["upcomingMatches"][$index][1] }} :  {{teamBrief["upcomingMatches"][$index][2]}}</td>
+                    <td>{{match[1] }} :  {{match[2]}}</td>
                 </tr>
             </table>
         </section>

@@ -3,6 +3,13 @@
  */
 angular.module("epl")
     .controller("PointsTableController",function($scope,PointsTableService,MatchScheduleService,MatchResultsService,$routeParams,$animate,$location) {
+    /*$scope.$on("ws:new_post",function(_,post){
+        $scope.$apply(function(){
+            $scope.note=post;
+            //alert($scope.note);
+        })
+
+    })*/
     PointsTableService.fetch().success(function (standings) {
         if($scope.standings==null) $scope.standings = standings;
     })

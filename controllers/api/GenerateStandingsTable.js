@@ -6,10 +6,12 @@ var _=require("lodash");
 var globals=require("../../Globals");
 var config=new globals();
 var router=require("express").Router();
+var webSockets=require("../../websockets");
 
 router.get("/api/standings",function(req,res){
             getTable(function (data) {
                 console.log(data);
+                //webSockets.broadcast("new_post",{note:"EPL 15/16 season kick starts on august 5"});
                 res.json(data);
             })
 })

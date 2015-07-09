@@ -34,7 +34,7 @@ eplDAO.prototype.getStarted=function(callback) {
 
         //players of element_type:1 are goal keepers who most certainly are with their team from the start of the season and thus the document holds all completed matches for that team
 
-        var match={"$match":{"element_type":1,"_id":{"$lt":500}}};
+        var match={"$match":{"element_type":1,"_id":{"$lt":491}}};
         //we are grouping by team name to gather the all the completed match results for each team
         var groupBy={
             "$group": {
@@ -46,7 +46,7 @@ eplDAO.prototype.getStarted=function(callback) {
         players_collection.aggregate([match,groupBy], function (err, data) {
             for (var i in data) {
                 //console.log(data[i]._id._id + "*****" + data[i].count.length);
-                if (data[i].count.length >= 24) {
+                if (data[i].count.length >= 0) {
                         teams_collection.insert(data[i], function (err, data) {
                         });
                 }
@@ -84,7 +84,6 @@ eplDAO.prototype.GeneratePointsTable=function(callback){
                     upperResult=resultArray;
                     callback(upperResult);
                 });
-
             });
         })
     })
@@ -121,14 +120,10 @@ function gatherResults(items,callback){
         }
         result = calculateResults(team_name, team_id,resultsArray,next_fixture);
         pointsTable[iterator++] = result;
-
     }
     callback(pointsTable);
 }
-
-
 // Internal function to calculate the overall stats for each team and return the stats as a record.
-
 function calculateResults(team_name,team_id,record,next_fixture){
     var totalWins=0;
     var draws=0;
@@ -164,7 +159,6 @@ function calculateResults(team_name,team_id,record,next_fixture){
     var teamRecord=new myTeam(team_name,team_id,webName,totalGamesPlayed, totalWins, totalLost, draws, goalsForwarded,goalsAllowed, goalDifference,totalPoints,nextMatch );
     return teamRecord;
 }
-
 // internal function to store the image files as base64 encoded strings into mongodb
 function uploadLogos(team_logo_files){
  //temporary storage for encoded strings
@@ -181,7 +175,6 @@ function uploadLogos(team_logo_files){
         q++;
         var query={"team_id":q};
         var operator={"$set":{"logo_url":final_result[i].img_src}}
-
        points_table.update(query,operator,function(err,data){
             //console.log(data);
             setTimeout(function(){
