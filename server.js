@@ -32,4 +32,4 @@ setTimeout(function(){
                 //webSockets.connect(server);
             })
 
-},35000);
+},55000);
