@@ -6,7 +6,7 @@ var mongoClient=require("mongodb").MongoClient;
 var _=require("lodash");
 var globals=require("../../globals");
 var config=new globals();
-var helpers=require("../../Helpers")
+var helpers=require("../../helpers")
 var helper=new helpers();
 
 router.get("/api/goalsByTeam",function(req,res){

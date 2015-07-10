@@ -7,7 +7,7 @@
 var globals=require("./globals");
 var config=new globals();
 
-var helper=new require("./Helpers")();
+var helper=new require("./helpers")();
 
 var mongoClient=require("mongodb").MongoClient;
 
