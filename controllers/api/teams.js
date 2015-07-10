@@ -3,7 +3,7 @@
  */
 var mongoClient=require("mongodb").MongoClient;
 var router=require("express").Router();
-var globals=require("../../Globals");
+var globals=require("../../globals");
 var config=new globals();
 
 router.get("/api/teams",function(req,res){

@@ -4,7 +4,7 @@
  * executed before any request is made to the database, So it has the key operations to create all critical collections in
  * MongoDB.
  */
-var globals=require("./Globals");
+var globals=require("./globals");
 var config=new globals();
 
 var helper=new require("./Helpers")();

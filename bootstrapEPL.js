@@ -3,7 +3,7 @@
  * Modules to create and load all the necessary collections on the MongoDB server, while the Node server is rebooting.
  */
 
-var globals=require("./Globals");
+var globals=require("./globals");
 var config=new globals();
 var eplDAO=require("./eplDAO");
 eplDAO=new eplDAO();

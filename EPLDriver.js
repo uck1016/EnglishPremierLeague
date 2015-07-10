@@ -2,7 +2,7 @@
  * Created by chaitanyakrishna on 3/23/2015.
  */
 //globals module is having all the globals variables required by the application
-var globals=require("./Globals");
+var globals=require("./globals");
 var config=new globals();
 var mongoClient=require("mongodb").MongoClient;
 var fs=require("fs");

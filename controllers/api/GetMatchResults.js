@@ -5,7 +5,7 @@
 var router=require("express").Router();
 var mongoClient=require("mongodb").MongoClient;
 var _=require("lodash");
-var globals=require("../../Globals");
+var globals=require("../../globals");
 var config=new globals();
 var helpers=require("../../Helpers")
 var helper=new helpers();

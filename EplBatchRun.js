@@ -3,7 +3,7 @@
  * Module to update and load all the English Premier League data objects in the backend and
  * make sure that the raw data collection is ready for running additional operations on it.
  */
-var eplDriver=require("./EplDriver");
+var eplDriver=require("./EPLDriver");
 var EplKeySet;
 var EplDataSet;
  //EplDriver Object has the properties defined to get data-objects from REST-API, alter the key set of the objects and
