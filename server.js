@@ -12,7 +12,7 @@ require("./EplBatchRun");
 setTimeout(function(){
     //bootstrapEPL module is loaded on start of the server as it creates all the necessary collections in mongoDB,
     //which are modeled based on application's access patterns.
-    var startEPL=require("./BootstrapEPL");
+    var startEPL=require("./bootstrapEPL");
             //Below statements load all the REST API's defined for the user inter-activity.
             app.use(require("./controllers/static"));
             app.use(require("./controllers/api/teams"));
