@@ -15,6 +15,7 @@ var eplDriver =function(){
 //Method to create the REST client and consume the response for each request.
 eplDriver.prototype.GetDataFromAPI=function(callback){
     var eplDataSet=[];
+    var p=1000000;
     for(var i=1;i<491;i++) {
         var playerURI=config.playerURL+i+"/";
         request.get(playerURI,function(err, response, body) {
@@ -23,10 +24,21 @@ eplDriver.prototype.GetDataFromAPI=function(callback){
             //console.log(new Date().getMinutes())
         });
     }
+    //console.log(eplDataSet.length);
+    (function check(){
     setTimeout(function(){
-        callback(eplDataSet);
-    },60000);
+        console.log(eplDataSet.length);
+        if(eplDataSet.length==490) callback(eplDataSet);
+        else check();
+    },15000);
+    })();
 };
+
+function wait(){
+    setTimeout(function(){
+
+    }, 10000);
+}
 //Method to read a configuration file containing the attributes (keys) required for the player Object
 eplDriver.prototype.getEplKeySet=function(callback){
 fs.readFile("./assets/eplKeySet.txt",function(err,data){
@@ -77,6 +89,7 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
 }
 //Method to store the data objects in mongoDB server.
 eplDriver.prototype.StoreToMongo=function(eplDataSet){
+    console.log("inside store to mongo");
     mongoClient.connect(config.url,function(err,db){
         db.dropCollection(config.players_collection,function(){
             console.log("dropping existing collections");
