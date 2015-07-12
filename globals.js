@@ -4,7 +4,7 @@
 var config=function(){
     var local_mongoURL="mongodb://localhost:27017/EPL15-16";
     var heroku_mongo_url=process.env.MONGOLAB_URI+"/test";
-    this.url= heroku_mongo_url;
+    this.url=heroku_mongo_url;
     this.port=4545;
     this.host="localhost";
 
