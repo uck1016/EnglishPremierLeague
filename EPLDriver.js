@@ -16,7 +16,7 @@ var eplDriver =function(){
 eplDriver.prototype.GetDataFromAPI=function(callback){
     var eplDataSet=[];
     var p=1000000;
-    for(var i=1;i<491;i++) {
+    for(var i=1;i<527;i++) {
         var playerURI=config.playerURL+i+"/";
         request.get(playerURI,function(err, response, body) {
             //console.log(body);
