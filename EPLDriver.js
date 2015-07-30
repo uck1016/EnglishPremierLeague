@@ -27,8 +27,7 @@ eplDriver.prototype.GetDataFromAPI=function(callback){
     //console.log(eplDataSet.length);
     (function check(){
     setTimeout(function(){
-        console.log(eplDataSet.length);
-        if(eplDataSet.length==490) callback(eplDataSet);
+        if(eplDataSet.length==526) callback(eplDataSet);
         else check();
     },15000);
     })();
