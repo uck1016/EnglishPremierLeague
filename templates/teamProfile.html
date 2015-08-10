@@ -41,7 +41,7 @@
                         <img class="carousel-image" src="./team-profiles/{{teamName}}/1.jpg" alt="./carousel.jpg">
                         <div class="carousel-caption">
                             <div class="carousel-detail">
-                            <p style="font-size:15px">Prev:{{teamBrief["last3matches"][2]}}</p>
+                            <p style="font-size:15px">Prev:{{teamBrief["last3matches"][0]}}</p>
                             <p style="font-size:25px">Next: {{teamBrief["upcomingMatches"][0][1]}}</p>
                                 <p> {{teamBrief["upcomingMatches"][0][2]}}</p>
                                 </div>
@@ -62,11 +62,11 @@
         <section class="schedule">
             <table name="briefTable " class=" previous-matches table table-responsive table-condensed">
                 <tr class="bg-primary">
-                <!--<th >Last 3 Fixtures</th>-->
+                <th >Last 3 Fixtures</th>
                 <th >Upcoming Fixtures</th>
                 </tr>
                 <tr class="bg-info" ng-repeat="match in teamBrief['upcomingMatches']">
-                <td style="background-color:lightgoldenrodyellow">{{teamBrief["last3matches"][2-$index]}}</td>
+                <td style="background-color:lightgoldenrodyellow">{{teamBrief["last3matches"][$index]}}</td>
                     <td>{{match[1] }} :  {{match[2]}}, 2015 </td>
                 </tr>
             </table>
