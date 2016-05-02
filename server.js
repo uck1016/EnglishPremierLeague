@@ -7,7 +7,7 @@ var app=express();
 app.use(bodyParser.json());
 var webSockets=require("./websockets");
 //Main module responsible for creating the underlying data structures required by the application
-require("./EplBatchRun");
+//require("./EplBatchRun");
 
 setTimeout(function(){
     //bootstrapEPL module is loaded on start of the server as it creates all the necessary collections in mongoDB,
