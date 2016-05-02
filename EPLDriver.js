@@ -9,29 +9,76 @@ var fs=require("fs");
 var request = require("request");
 var assert= require("assert");
 
-var eplDriver =function(){
+Array.prototype.checkSize = function(){
+    return this.length;
+}
+
+Array.prototype.construt = function(){
+    for(var i = 0;i<this.length;i++){
+        this[i] = 0;
+    }
+}
+
+var eplDriver = function(){
+    this.totalRecords = 0;
 
 }
 //Method to create the REST client and consume the response for each request.
 eplDriver.prototype.GetDataFromAPI=function(callback){
     var eplDataSet=[];
     var p=1000000;
-    for(var i=1;i<527;i++) {
+    for(var i=1;i<691;i++) {
         var playerURI=config.playerURL+i+"/";
+        var self = i;
         request.get(playerURI,function(err, response, body) {
-            //console.log(body);
-            eplDataSet.push(JSON.parse(body));
+            //console.log("*****"+playerURI);
+            if( body !== undefined) {
+                try {
+                    eplDataSet.push(JSON.parse(body));
+                    console.log("The length is"+ eplDataSet.length)
+                }
+                catch(err){
+                    console.log("error on url"+ Object.keys(this));
+                }
+            }else {
+                console.log("******error on url"+ this.path);
+            }
+
             //console.log(new Date().getMinutes())
         });
     }
     //console.log(eplDataSet.length);
     (function check(){
     setTimeout(function(){
-        if(eplDataSet.length==526) callback(eplDataSet);
+        //console.log("length is"+ eplDataSet.length)
+        if(eplDataSet.length >= 690) return callback(eplDataSet);
         else check();
-    },15000);
+    },150);
     })();
 };
+
+eplDriver.prototype.callAPI = function(callback){
+    var res = this.buildRequests();
+    var self = this;
+    self.totalRecords = 0;
+    self.epl = [];
+    var k =0;
+    for(var j =0; j<res.length; j++)
+        res[j](config.playerURL + ++k + "/", self, function (err, response) {
+            //console.log("************");
+            if (response) {
+                if (response.checkCount) {
+                    response.checkCount();
+                }
+                if(!response.flag){
+                    console.log("******"+" for url "+k+"  length is "+self.epl.length);
+
+                    return callback(self.epl);
+                }
+            }
+            //check(flag);
+        });
+}
 
 function wait(){
     setTimeout(function(){
@@ -61,17 +108,20 @@ eplDriver.prototype.FilterEplDataSet=function(eplDataSet,eplKeySet,callback){
 }
 eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
     //Modifying the date string to date object in the key name "fixtures.all" holding all upcoming fixtures
-    for(var each in eplDataSet){
-        eplDataSet[each]["_id"]=eplDataSet[each]["id"];
-        delete eplDataSet[each]["id"];
-        var fixtures_all=eplDataSet[each]["fixtures"]["all"];
+    var k = 0;
+    console.log(eplDataSet.length);
+    for(var j = 0 ; j<eplDataSet.length;j++){
+        eplDataSet[j]["_id"]=eplDataSet[j]["id"];
+        delete eplDataSet[j]["id"];
+        var fixtures_all=eplDataSet[j]["fixtures"]["all"];
         for(var i in fixtures_all){
-            if(fixtures_all[i][0].length>5){
+            if(fixtures_all[i][0] && fixtures_all[i][0].length>5){
                 var d = GetDate(fixtures_all[i], 0);
                 //console.log(d);
-                eplDataSet[each]["fixtures"]["all"][i][0] = d;
+                eplDataSet[j]["fixtures"]["all"][i][0] = d;
             }
         }
+        k++;
     }
     //Modifying the date string to date object in the key name "fixtures.summary" holding the last three fixtures
     /*for(var each in eplDataSet){
@@ -90,20 +140,61 @@ eplDriver.prototype.AlterEplDataSet=function(eplDataSet,callback){
 eplDriver.prototype.StoreToMongo=function(eplDataSet){
     console.log("inside store to mongo");
     mongoClient.connect(config.url,function(err,db){
+        //console.log(Object.keys());
         db.dropCollection(config.players_collection,function(){
             console.log("dropping existing collections");
         });
         var epldata=db.collection(config.players_collection);
         epldata.insert(eplDataSet,{w:1},function(err,res){
             //assert.equals(null,err);
-            console.log(res);
             console.log("updating database")
             db.close();
         })
     });
 }
 eplDriver.prototype.Test=function(){
+    var playerURI=config.playerURL+701+"/";
 
+    console.log("URL IS"+ playerURI+" Performing request");
+    request.get(playerURI,function(err, response, body) {
+        //console.log("*****"+body);
+        if( body === undefined) {
+            console.log("**********"+"*******");
+        }
+        //eplDataSet.push(JSON.parse(body));
+        //console.log(new Date().getMinutes())
+    });
+}
+
+eplDriver.prototype.getTotalRecords = function (){
+    var flag = true;
+    var playerURI = config.playerURL;
+    var fun = this.makeRequest;
+    var arr = new Array(10);arr.construt();
+console.log(arr.checkSize())
+    console.log(arr);
+    var i = 1;
+    var self = this;
+
+arr.forEach(function(i, k){
+    //console.log(this);
+    var k = k+1;
+    if(flag) {
+        console.log("FLAG IS"+ flag)
+        //console.log("Peforming request on" + playerURI + k + "/");
+        fun(playerURI + k + "/",self, function (err, response) {
+            //console.log("************");
+            if (response) {
+                if (response.checkCount) {
+                    response.checkCount();
+                }
+                flag = response.flag;
+                console.log("FLAG AFTER RESPONSE IS"+ flag);
+            }
+            //check(flag);
+        });
+    }
+})
 }
 function GetDate(item,index){
     var DateInString=item[index];
@@ -115,6 +206,71 @@ function GetDate(item,index){
     return x;
 }
 
+function check(flag){
+    setTimeout(function(){
+        if(!flag){
+            //callback(eplDataSet);
+            console.log("*****INSIDE*******");
+            process.exit();
+        }
+        else check();
+    },15000);
+}
+
+eplDriver.prototype.makeRequest = function(url, outerRequest, callback){
+var self = outerRequest;
+    console.log("Performing request on"+ url);
+    request.get(url, function(err, res){
+        //console.log(res.statusCode);
+        if(err){
+            console.log("error on url"+ url);
+        }
+        if( res.statusCode && res.statusCode === 200 ) {
+            console.log("RESPONSE SUCCESS");
+            self.epl.push(JSON.parse(res.body));
+            res.checkCount = function(){
+                self.totalRecords++;
+                res.flag = true;
+                console.log("*****"+self.totalRecords)
+            }
+        } else if(res.statusCode === 404) {
+            console.log("*******FALSE");
+            console.log("Error on"+ url);
+            res.flag = false;
+        }
+        return callback(null,res);
+    })
+}
+
+eplDriver.prototype.mongoTest = function(){
+        console.log("inside store to mongo");
+        mongoClient.connect(config.url,function(err,db){
+            console.log(db.databaseName);
+            //db.dropCollection(config.teams_collection,function(){
+             //   console.log("dropping existing collections");
+            //});
+            var epldata=db.collection(config.teams_collection);
+            epldata.find(function(err, res){
+                var re = res.toArray(function(err, res){
+                    console.log("****"+res.length);
+                });
+            })
+            //epldata.insert(eplDataSet,{w:1},function(err,res){
+                //assert.equals(null,err);
+             //   console.log(res);
+               // console.log("updating database")
+                //db.close();
+            //})
+        });
+}
+
+eplDriver.prototype.buildRequests = function(){
+    var arr = new Array(1000);
+    for(var i = 0; i < arr.length; i++){
+        arr[i] = this.makeRequest;
+    }
+    return arr;
+}
 function CheckDateInString(month){
     //console.log (month);
     var next_year_months=["Jan","Feb","Mar","Apr","May"];

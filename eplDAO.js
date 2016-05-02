@@ -43,31 +43,35 @@ eplDAO.prototype.getStarted=function(callback) {
                 "count": {"$first": "$fixture_history.all"}
             }
         }
+        var teams_col = [];
         players_collection.aggregate([match,groupBy], function (err, data) {
-            for (var i in data) {
-                //console.log(data[i]._id._id + "*****" + data[i].count.length);
-                if (data[i].count.length >= 0) {
-                        teams_collection.insert(data[i], function (err, data) {
-                        });
+            for (var k = 0; k < data.length; k++) {
+                console.log(data[k]._id._id + "*****" + data[k].count.length);
+                if (data[k].count.length >= 0) {
+                    teams_col.push(data[k]);
                 }
                 else {
                     //console.log(data[i]._id._id);
                 }
             }
+            teams_collection.insert(teams_col, function (err, data) {
+                if(data) callback();
+            });
              //db.close();
-            callback();
+
         })
     })
 }
 //Function to load team logos (image files) from source directory,
 //sort them alphabetically w.r.t team name and assign a ID to each logo which is in consistent with team_id of the original data set
 eplDAO.prototype.AccumulateLogos=function(){
+    console.log("called accumulate logos");
     var dir=config.team_logos_directory;
     fs.readdir(dir,function(err,team_logo_files){
 
     var sorted_team_logo_files=team_logo_files.sort();
         var p=1;
-    for(var i in sorted_team_logo_files){
+    for(var i = 0; i<sorted_team_logo_files.length;i++){
         if(sorted_team_logo_files[i])
             team_logos.push({"_id":p++,"img_src":dir+sorted_team_logo_files[i]});
     }
@@ -78,15 +82,15 @@ eplDAO.prototype.GeneratePointsTable=function(callback){
     var upperResult;
     mongoClient.connect(config.url,function(err,db){
         var teams_collection=db.collection(config.teams_collection);
-        teams_collection.find(function(err,teamsCursor){
-            teamsCursor.toArray(function(err, teamsArray){
+        teams_collection.find().toArray(function(err, teamsArray){
+                console.log("***** length is"+ teamsArray.length);
                 gatherResults(teamsArray,function(resultArray){
                     upperResult=resultArray;
+                    console.log("RESULT IS"+ upperResult);
                     callback(upperResult);
                 });
             });
         })
-    })
 }
 // function to store the calculated points table into mongodb.
 eplDAO.prototype.insertPointsTable=function(pointsTable,callback){
@@ -106,19 +110,20 @@ eplDAO.prototype.insertPointsTable=function(pointsTable,callback){
 }
 // function to compute EPL points table
 function gatherResults(items,callback){
+    console.log(items.length);
     var pointsTable=[];
     var iterator=0;
-    for(var team in items) {
+    for(var team = 0 ; team < items.length; team++) {
         var team_name = items[team]._id._id;
         var team_id=items[team]._id.team_id;
         var next_fixture=items[team]._id.next_fixture;
         var resultsArray = [];
         var matchResultsContainer = items[team].count;
-        for (var i in matchResultsContainer) {
+        for (var i = 0 ; i < matchResultsContainer.length; i++) {
             //console.log(matchResultsContainer[i][2]);
             resultsArray[i] = matchResultsContainer[i][2];
         }
-        result = calculateResults(team_name, team_id,resultsArray,next_fixture);
+        var result = calculateResults(team_name, team_id,resultsArray,next_fixture);
         pointsTable[iterator++] = result;
     }
     callback(pointsTable);
@@ -164,19 +169,21 @@ function uploadLogos(team_logo_files){
  //temporary storage for encoded strings
     var p=1;
     var final_result=[];
-    for(var i in team_logo_files) {
+    for(var i = 0; i<team_logo_files.length; i++) {
+        console.log("*****"+ team_logo_files[i].img_src);
         var image_string = fs.readFileSync(team_logo_files[i].img_src, "base64");
         final_result.push({"_id":p++,"img_src":image_string});
     }
     mongoClient.connect(config.url,function(err,db){
         var points_table=db.collection(config.pointsTable_collection);
         var q=0;
-    for(var i in final_result) {
+    for(var i = 0; i< final_result.length; i++) {
         q++;
         var query={"team_id":q};
-        var operator={"$set":{"logo_url":final_result[i].img_src}}
+        var operator={"$set":{"logo_url":final_result[i].img_src}};
+        console.log("UPLOADING IMAGES");
        points_table.update(query,operator,function(err,data){
-            //console.log(data);
+            console.log("*********"+data);
             setTimeout(function(){
                 db.close();
             },3000);
