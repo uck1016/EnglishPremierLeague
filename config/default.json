@@ -1,0 +1,23 @@
+{
+  "mongoDB" : {
+    "host" : "localhost",
+    "port" : "27017",
+    "protocol" : "http",
+    "databaseName" : "epl_2016",
+    "collections" : {
+      "players" : "epl_data",
+      "teams" : "teams",
+      "points" : "points_table"
+    }
+  },
+  "api" : {
+    "host" : "fantasy.premierleague.com",
+    "port" : "80",
+    "protocol" : "http",
+    "baseUrl" : "web/api/elements/"
+  },
+  "staticContent" : {
+    "dir" : "./assets/logos"
+  }
+
+}
