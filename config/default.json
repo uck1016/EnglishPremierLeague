@@ -1,7 +1,12 @@
 {
+  "appConfig" : {
+    "logDir" : "/log",
+    "host" : "localhost",
+    "port" : 4545
+  },
   "mongoDB" : {
     "host" : "localhost",
-    "port" : "27017",
+    "port" : 27017,
     "protocol" : "http",
     "databaseName" : "epl_2016",
     "collections" : {
@@ -12,7 +17,7 @@
   },
   "api" : {
     "host" : "fantasy.premierleague.com",
-    "port" : "80",
+    "port" : 80,
     "protocol" : "http",
     "baseUrl" : "web/api/elements/"
   },
